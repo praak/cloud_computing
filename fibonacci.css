@@ -9,9 +9,20 @@ text-align: left;
 }
 
 #fib_form {
-width: 100%;
 margin: 0 auto;
 text-align: left;
 margin-top:100px;
 padding-top:10px;
+padding-right: 10px;
 }
+
+#divcenter
+{
+    position: absolute;
+    top: 35%;
+    left: 39%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 500px;
+    height: 500px;
+}​
