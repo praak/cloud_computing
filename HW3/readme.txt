@@ -1,3 +1,8 @@
+Deployed to http://mycloud-1234.appspot.com/ and http://dulcet-radar-123401.appspot.com/ 
+Both are showing up with issues. 
+It has no problems running on localhost. So no idea why it would have problems after deploying. 
+
+
 This is the Google App engine Homework Folder
 
 Notes: 
