@@ -8,7 +8,6 @@ data = list(range(10000))
 datasource = dict(enumerate(data))
 # print("Data:")
 # print(datasource)
-print("Return...")
 
 def mapfn(k, v):
     import math
@@ -28,8 +27,8 @@ def mapfn(k, v):
             #endif
         #endfor i
         if flag == 1:
-            print("Prime:")
-            print(v)
+            # print("Prime:")
+            # print(v)
             yield 'Primes',int(v)
     #end else n
 #endmapfn
