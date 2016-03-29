@@ -55,5 +55,3 @@ s.reducefn = reducefn
 
 results = s.run_server(password="changeme")
 print results
-
-
