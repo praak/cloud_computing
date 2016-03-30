@@ -3,27 +3,49 @@ import mincemeat
 import sys
 
 file = open(sys.argv[-1],'r')
-data = list(file)
+something = list(file)
+
+data = []
+lit = []
+siz = len(something)/60 + 2
+
+for i in something:
+    lit.append(i)
+    if len(lit)==siz:
+        data.append(lit)
+        lit = []
+
+data.append(lit)
 file.close()
+
 datasource = dict(enumerate(data))
 
 def mapfn(k, v):
+    count = 0.0
+    total = 0.0
+    squares = 0.0
+    # throwing list into one string
+    v = ''.join(v)
     for w in v.split():
-        yield 'Value', float(w)
+        total += float(w)
+        squares += float(w)**2
+        count += 1
+    yield 'Value', (total,squares,count)
 
 def reducefn(k, vs):
     import math
 
-    total, std_dv, average = 0.0, 0.0, 0.0
-    total = sum(vs)
-    average = total/len(vs)
-    for i in range(0, len(vs)):
-        std_dv = std_dv + ((vs[i] - average)**2)
-    std_dv = math.sqrt(std_dv/len(vs))
+    stotal = 0.0
+    ssquares = 0.0
+    scount = 0.0
+    for i in vs:
+        (total,squares,count) = i
+        stotal += total
+        ssquares += squares
+        scount += count
 
-    print ("Average: %f \nCount: %d \nStandard Deviation: %f \nSum: %d" % (average,len(vs),std_dv,total))
-
-    return len(vs), total, std_dv, average
+    std_dv = math.sqrt((1/(scount-1))*(ssquares - ((1/scount)*(stotal**2))))
+    return (std_dv,scount,stotal)
 
 s = mincemeat.Server()
 s.datasource = datasource
@@ -31,6 +53,5 @@ s.mapfn = mapfn
 s.reducefn = reducefn
 
 results = s.run_server(password="changeme")
-count, total, std_dv, average = results['Value']
-
-print("Count: %d \nSum: %f \nStandard Deviation: %f \nMean: %f" % (count,total,std_dv,average))
+(std_dv, count, total) = results['Value']
+print("Count: %d \nSum: %f \nStandard Deviation: %f" % (count,total,std_dv))
