@@ -19,7 +19,7 @@ from itertools import product
 
 # setup charz as all the digits and ascii_lowercase
 chars = digits + ascii_lowercase
-# setup size as total size/60 , cuz 60 is fun
+# setup size as total size/60 , grouping 60, cuz 60 is fun
 siz = (36**4 + 36**3 + 36**2 + 36)/60 + 1
 # take in hash key inputted in command line
 hash_in = sys.argv[-1]
